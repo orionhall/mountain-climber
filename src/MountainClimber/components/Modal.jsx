@@ -16,6 +16,7 @@ const ModalHeader = styled.div`
   width: 100%;
   //padding: 20px 0;
   border-bottom: 1px solid gainsboro;
+  position: relative;
 `;
 
 const ModalBody = styled.div`
@@ -30,6 +31,19 @@ const ModalInput = styled.input`
   font-style: ${({ clicked }) => (clicked ? 'normal' : 'italic')};
 `;
 
+const CloseButton = styled.button`
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 10px;
+  top: -10px;
+  background: gray;
+  box-shadow: inset 0px 0px 3px 2px rgba(255, 255, 255, 0.48);
+  color: black;
+  margin: 0;
+  padding: 0;
+`;
+
 const Modal = ({ modalType, dispatch }) => {
   const headerText = `Add ${modalType}`;
   const [input, setInput] = useState(`Type a new ${modalType} to add`);
@@ -39,6 +53,9 @@ const Modal = ({ modalType, dispatch }) => {
   return (
     <ModalWrapper>
       <ModalHeader>
+        <CloseButton onClick={() => dispatch({ type: ACTIONS.HIDE_ADD_MODAL })}>
+          X
+        </CloseButton>
         <h1>{headerText}</h1>
       </ModalHeader>
       <ModalBody>

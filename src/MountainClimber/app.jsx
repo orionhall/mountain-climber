@@ -5,12 +5,24 @@ import { addSummit } from '../actions';
 import { ACTIONS } from './constants';
 import MountainClimber from './components/MountainClimber';
 import Nav from './components/Nav';
+import Modal from './components/Modal';
 
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   background-color: black;
   overflow: hidden;
+`;
+
+const Card = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 60%;
+  margin: 0 auto;
+  border: 1px solid gainsboro;
+  color: white;
 `;
 
 const reducer = (state, { type, payload }) => {
@@ -20,6 +32,9 @@ const reducer = (state, { type, payload }) => {
         ...state,
         showAddModal: '',
         summits: addSummit(state, payload),
+        selections: {
+          page: 'summitsIndex',
+        },
       };
     case ACTIONS.SHOW_ADD_MODAL:
       return {
@@ -56,15 +71,20 @@ const App = () => {
     showAddModal: '',
   };
   const [state, dispatch] = useReducer(reducer, initialState, initState);
-
+  const { showAddModal } = state;
   console.log({ showAddModal: state.showAddModal, summits: state.summits });
 
   return (
     <Wrapper>
       <Nav dispatch={dispatch} />
-      {/*TODO modal goes here w/ isVisible*/}
       {/*TODO screen/page selection*/}
-      <MountainClimber state={state} dispatch={dispatch} />
+      <Card>
+        {showAddModal !== '' ? (
+          <Modal modalType={showAddModal} dispatch={dispatch} />
+        ) : (
+          <MountainClimber state={state} dispatch={dispatch} />
+        )}
+      </Card>
     </Wrapper>
   );
 };
