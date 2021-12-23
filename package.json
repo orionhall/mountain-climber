@@ -76,7 +76,7 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "engines": {
-    "node": "~17.3.0"
+    "node": "15.4.0"
   },
   "scripts": {
     "start": "node scripts/start.js",
