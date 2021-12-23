@@ -63,7 +63,7 @@ const initState = state => state;
 const App = () => {
   const initialState = {
     summits: [],
-    peaks: [],
+    waypoints: [],
     hills: [],
     selections: {
       page: '',
