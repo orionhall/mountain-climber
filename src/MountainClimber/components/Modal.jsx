@@ -44,9 +44,9 @@ const CloseButton = styled.button`
   padding: 0;
 `;
 
-const Modal = ({ modalType, dispatch }) => {
-  const headerText = `Add ${modalType}`;
-  const [input, setInput] = useState(`Type a new ${modalType} to add`);
+const Modal = ({ type, dispatch }) => {
+  const headerText = `Add ${type}`;
+  const [input, setInput] = useState(`Type a new ${type} to add`);
   const [error, setError] = useState('');
   const [clicked, setClicked] = useState(false);
 
@@ -78,7 +78,7 @@ const Modal = ({ modalType, dispatch }) => {
                 payload: { summit: input },
               });
             } else {
-              setError(`I can't add a blank ${modalType} you dum dum`);
+              setError(`I can't add a blank ${type} you dum dum`);
             }
           }}
         >

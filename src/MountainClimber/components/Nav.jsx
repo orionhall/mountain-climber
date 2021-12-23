@@ -15,10 +15,33 @@ const Nav = ({ dispatch }) => {
     <NavBar>
       <Button
         onClick={() =>
-          dispatch({ type: ACTIONS.SET_PAGE, payload: { page: 'summits' } })
+          dispatch({
+            type: ACTIONS.SET_PAGE_TYPE,
+            payload: { type: 'summits' },
+          })
         }
       >
         Summits
+      </Button>
+      <Button
+        onClick={() =>
+          dispatch({
+            type: ACTIONS.SET_PAGE_TYPE,
+            payload: { type: 'waypoints' },
+          })
+        }
+      >
+        Waypoints
+      </Button>
+      <Button
+        onClick={() =>
+          dispatch({
+            type: ACTIONS.SET_PAGE_TYPE,
+            payload: { type: 'hills' },
+          })
+        }
+      >
+        Hills
       </Button>
     </NavBar>
   );

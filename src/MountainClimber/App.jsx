@@ -1,8 +1,7 @@
 import React, { useReducer } from 'react';
 import styled from 'styled-components';
-import './app.css';
-import { addSummit } from '../actions';
-import { ACTIONS } from './constants';
+import './App.css';
+import { initialState, reducer, resetState } from './reducer';
 import MountainClimber from './components/MountainClimber';
 import Nav from './components/Nav';
 import Modal from './components/Modal';
@@ -25,65 +24,15 @@ const Card = styled.div`
   color: white;
 `;
 
-const reducer = (state, { type, payload }) => {
-  switch (type) {
-    case ACTIONS.ADD_SUMMIT:
-      return {
-        ...state,
-        showAddModal: '',
-        summits: addSummit(state, payload),
-        selections: {
-          page: 'summitsIndex',
-        },
-      };
-    case ACTIONS.SHOW_ADD_MODAL:
-      return {
-        ...state,
-        showAddModal: payload.modalType,
-      };
-    case ACTIONS.HIDE_ADD_MODAL:
-      return {
-        ...state,
-        showAddModal: '',
-      };
-    case ACTIONS.SET_PAGE:
-      return {
-        ...state,
-        selections: {
-          ...state.selections,
-          page: payload.page,
-        },
-      };
-    default:
-      return state;
-  }
-};
-const initState = state => state;
-
 const App = () => {
-  const initialState = {
-    summits: [],
-    waypoints: [],
-    hills: [],
-    selections: {
-      page: '',
-    },
-    showAddModal: '',
-  };
-  const [state, dispatch] = useReducer(reducer, initialState, initState);
-  const { showAddModal } = state;
-  console.log({ showAddModal: state.showAddModal, summits: state.summits });
+  const [state, dispatch] = useReducer(reducer, initialState, resetState);
+  console.log({ state });
 
   return (
     <Wrapper>
       <Nav dispatch={dispatch} />
-      {/*TODO screen/page selection*/}
       <Card>
-        {showAddModal !== '' ? (
-          <Modal modalType={showAddModal} dispatch={dispatch} />
-        ) : (
-          <MountainClimber state={state} dispatch={dispatch} />
-        )}
+        <MountainClimber state={state} dispatch={dispatch} />
       </Card>
     </Wrapper>
   );
