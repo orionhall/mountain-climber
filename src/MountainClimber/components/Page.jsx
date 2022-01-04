@@ -44,7 +44,7 @@ const GoalText = styled.div`
 `;
 
 const getCurrentGoal = (goals, type, id) => {
-  const currentGoal = goals && goals[id];
+  const currentGoal = goals && goals.find(goal => goal.id === id);
 
   return currentGoal || `${type} #${id} not found.`;
 };
@@ -56,7 +56,6 @@ const Page = ({ state, dispatch }) => {
   } = state;
   const goals = goalData[type];
   const currentGoal = getCurrentGoal(goals, type, id);
-  debugger;
 
   return (
     <Wrapper>
@@ -68,14 +67,15 @@ const Page = ({ state, dispatch }) => {
             goals.map(goal => {
               return (
                 <GoalWrapper
+                  key={goal.id}
                   onClick={() =>
                     dispatch({
-                      type: ACTIONS.SET_PAGE_ACTION,
-                      payload: { action: 'show' },
+                      type: ACTIONS.SET_PAGE_PARAMS,
+                      payload: { action: 'show', id: goal.id },
                     })
                   }
                 >
-                  <GoalText>{goal}</GoalText>
+                  <GoalText>{goal.name}</GoalText>
                 </GoalWrapper>
               );
             })
@@ -95,12 +95,13 @@ const Page = ({ state, dispatch }) => {
             </div>
           )
         ) : action === 'show' ? (
-          <div>{currentGoal}</div>
+          <div>{currentGoal.name}</div>
         ) : null}
       </GoalsSection>
       <Button
+        // Need to revisit this button
         onClick={() =>
-          dispatch({ type: ACTIONS.SET_PAGE_ACTION, payload: { action: '' } })
+          dispatch({ type: ACTIONS.SET_PAGE_PARAMS, payload: { action: '' } })
         }
       >
         Back

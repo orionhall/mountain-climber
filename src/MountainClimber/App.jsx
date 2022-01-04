@@ -1,10 +1,10 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import './App.css';
-import { initialState, reducer, resetState } from './reducer';
 import MountainClimber from './components/MountainClimber';
 import Nav from './components/Nav';
-import Modal from './components/Modal';
+import StateDisplay from './components/StateDisplay';
+import { MountainClimberProvider } from './state/MountainClimberProvider';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -24,18 +24,16 @@ const Card = styled.div`
   color: white;
 `;
 
-const App = () => {
-  const [state, dispatch] = useReducer(reducer, initialState, resetState);
-  console.log({ state });
-
-  return (
+const App = () => (
+  <MountainClimberProvider>
     <Wrapper>
-      <Nav dispatch={dispatch} />
+      <Nav />
       <Card>
-        <MountainClimber state={state} dispatch={dispatch} />
+        <MountainClimber />
       </Card>
+      <StateDisplay />
     </Wrapper>
-  );
-};
+  </MountainClimberProvider>
+);
 
 export default App;

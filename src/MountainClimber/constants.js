@@ -1,8 +1,9 @@
 export const ACTIONS = {
-  ADD_SUMMIT: 'addSummit',
+  ADD_GOAL: 'addGoal',
   HIDE_ADD_MODAL: 'hideAddModal',
-  SET_PAGE_ACTION: 'setPageAction',
-  SET_PAGE_ID: 'setPageId',
-  SET_PAGE_TYPE: 'setPageType',
   SHOW_ADD_MODAL: 'showAddModal',
+  SET_PAGE_PARAMS: 'setPageParams',
+  TOGGLE_STATE: 'toggleState',
 };
+
+export const STORAGE_KEY = 'mountainClimberGoalData';

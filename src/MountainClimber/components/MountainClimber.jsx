@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Modal from './Modal';
 import Page from './Page';
+import { MountainClimberContext } from '../state/MountainClimberProvider';
 
-const MountainClimber = ({ state, dispatch }) => {
+const MountainClimber = () => {
+  const { state, dispatch } = useContext(MountainClimberContext);
   const { showAddModal } = state;
   if (showAddModal) {
     return <Modal type={showAddModal} dispatch={dispatch} />;
@@ -11,7 +13,8 @@ const MountainClimber = ({ state, dispatch }) => {
   return (
     <>
       <Page state={state} dispatch={dispatch} />
-      {showAddModal && <Modal type={showAddModal} dispatch={dispatch} />}
+      {/*TODO refactor type*/}
+      {showAddModal ? <Modal type={showAddModal} dispatch={dispatch} /> : null}
     </>
   );
 };

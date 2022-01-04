@@ -74,8 +74,8 @@ const Modal = ({ type, dispatch }) => {
           onClick={() => {
             if (clicked && input !== '') {
               dispatch({
-                type: ACTIONS.ADD_SUMMIT,
-                payload: { summit: input },
+                type: ACTIONS.ADD_GOAL,
+                payload: { name: input, type: type.toLowerCase() },
               });
             } else {
               setError(`I can't add a blank ${type} you dum dum`);
